@@ -1,0 +1,50 @@
+<canvas width="600" height="400"></canvas>
+
+Escolha uma cor: <input type="color">
+
+<script>
+	
+	var tela = document.querySelector("canvas");
+	var pincel = tela.getContext("2d");
+
+	pincel.fillStyle = "gray";
+	pincel.fillRect(0, 0, 600, 400);
+
+	var raio = 10;
+  var desenha = false;
+
+	function desenhaCirculo(evento) {
+
+		var x = evento.pageX - tela.offsetLeft;
+		var y = evento.pageY - tela.offsetTop;
+		var cor = document.querySelector("input");
+
+		if(desenha) {
+			
+			pincel.fillStyle = cor.value;
+			pincel.beginPath();
+			pincel.arc(x, y, 10, 0, 2*3.14);
+			pincel.fill();
+			console.log(raio);
+
+		}
+
+	}
+
+	tela.onmousemove = desenhaCirculo;
+
+	// Atribuindo diretamente a função anônima
+	tela.onmousedown = function() {
+
+		desenha = true;
+
+	}
+  
+	// Atribuindo diretamente a função anônima
+	tela.onmouseup = function() {
+
+		desenha = false;
+
+	}
+
+</script>
